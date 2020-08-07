@@ -23,7 +23,7 @@ import "./styles.css";
 
 export default function App(props) {
   //const [cartItems, setCartItems] = useState([]); For Hooks
-  const [experimentalMode, setExperimentalMode] = useState(false)
+  const [experimentalMode, setExperimentalMode] = useState(true)
   const setExpMode = (mode) => setExperimentalMode(mode);
   const expMode = () => experimentalMode;
 
@@ -37,7 +37,19 @@ export default function App(props) {
 
 
   const api = {setCurrentPage, currentPage, setPriorPage, priorPage, setExpMode, expMode};
+  useEffect(() => {
+    setTimeout(() => {  waitFunc(); }, 2000);
+   },[]
+  );
 
+  const waitFunc = () =>{
+    document.getElementById("loadText").innerHTML = "CLICK TO START";
+  }
+
+  const changeFunc = () =>{
+    document.getElementById("song").play();
+    setExperimentalMode(false);
+  }
   const renderPage = () =>{
     if(api.currentPage() ==="HOME"){
     }else if (api.currentPage() ==="ABT"){
@@ -52,6 +64,20 @@ export default function App(props) {
   return (
     <>
     <MainContext.Provider value={api}>
+          {
+              experimentalMode ?
+              <>
+              <div class="spinner">
+                <p id="loadText" onClick={ () => changeFunc() } >LOADING</p>
+                <div class="rect1"></div>
+                <div class="rect2"></div>
+                <div class="rect3"></div>
+                <div class="rect4"></div>
+                <div class="rect5"></div>
+               </div>
+               </>
+              :
+              <>
             <SynthwaveBackground />
             <Navbar />
             <div id="overlay">
@@ -59,7 +85,8 @@ export default function App(props) {
                 <AsciiTitle />
               </div>
               {renderPage()}
-            </div>
+            </div></>
+          }
   
     </MainContext.Provider>
     </>

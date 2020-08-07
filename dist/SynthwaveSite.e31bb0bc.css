@@ -57,9 +57,10 @@ body,
 
 .spinner > div {
   background-color: rgb(51, 255, 0);
-  height: 100%;
+  height: 40px;
   width: 6px;
   display: inline-block;
+  margin: 0rem 0.25rem;
   
   -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
   animation: sk-stretchdelay 1.2s infinite ease-in-out;
