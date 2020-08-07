@@ -44,12 +44,14 @@ function BloomEffect() {
 
 function Delorean() {
   var carspeed = -0.3 *0.1;
-  var carspeedS = -0.3 *0.1;
+  var carspeedS = 0.3 *0.3;
   const parallaxFactor = 0.001;
   //useEffect(() => document.addEventListener('mousemove', handleMouseMove));
   var gltf = useLoader(THREE.GLTFLoader, deloreansilver);
   var sc = gltf.scene;
-
+  const [left, setLeft] = useState(false);
+  const [right, setRight] = useState(false);
+  const [playerSpeedZ, setPlayerSpeedZ] = useState(0);
 
   const handleMouseMove = (event) => {
       const wW = window.innerWidth;
@@ -58,7 +60,38 @@ function Delorean() {
       sc.position.x = (event.clientX - (wW/2)) *parallaxFactor;
       //camera.position.y = ((event.clientY) * parallaxFactor * 10) + 3;
   }
-  
+
+  //document.onmousemove = handleMouseMove;
+
+  document.onkeydown = checkKey;
+
+  function checkKey(e) {
+
+      e = e || window.event;
+
+      if (e.keyCode == '38') {
+          // up arrow
+      }
+      else if (e.keyCode == '40') {
+          // down arrow
+      }
+      else if (e.keyCode == '37') {
+        // left arrow
+        setPlayerSpeedZ(carspeedS);
+        console.log("LEFT");
+      }
+      else if (e.keyCode == '39') {
+        // right arrow
+        setPlayerSpeedZ(-carspeedS);
+        console.log("RIGHT");
+      }
+  }
+
+
+  useEffect(()=>{document.onkeydown = checkKey;},[])
+
+  useEffect(()=>{
+  })
   useFrame(({ clock, camera }) => {
     if(sc.position.z < (-20)){
         //speed = -speed;
@@ -67,17 +100,19 @@ function Delorean() {
     }else if(sc.position.z > 0){
         carspeed = -carspeed;
   }
-    /*
-    if(sc.position.x < (-2)){
+    
+    if(sc.position.x < -10){
       //speed = -speed;
-      carspeedS = -carspeedS;
+      setPlayerSpeedZ(0);
+      sc.position.x = -10;
       //sphere.material.color.setHex(randomColourGenerator());
-    }else if(sc.position.x > 2){
-      carspeedS = -carspeedS;
-    }*/
-
+    }else if(sc.position.x > 10){
+      sc.position.x = 10;
+      setPlayerSpeedZ(0);
+    }
+    
     sc.translateX(carspeed);
-    //sc.translateZ(carspeedS);
+    sc.translateZ(playerSpeedZ); /*COMMENT OUT FOR NO ARROW CONTROL*/
   });
 
   return <primitive object={sc} position={[0, 0, -8]} rotation={[0,(-Math.PI/2),0]} scale={[4,4,4]}/>
