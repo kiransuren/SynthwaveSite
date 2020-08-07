@@ -99,6 +99,25 @@ body,
     -webkit-transform: scaleY(1.0);
   }
 }
+
+#aud{
+  position:absolute;
+  bottom:1%;
+  right:2%;
+/*   left: 2%;
+  top: 1%; */
+  z-index: 200;
+  display: flex;
+  flex-direction: column-reverse;
+  font-family: 'Source Code Pro', monospace;
+}
+
+#music-cred{
+  margin-left: 3%;
+  z-index: 200;
+  color: rgb(0, 255, 21);
+  font-family: 'Source Code Pro', monospace;
+}
 html,
 body,
 #root {

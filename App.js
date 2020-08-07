@@ -67,13 +67,3 @@ export default function App(props) {
 }
 
 
-
-
-/*             <SynthwaveBackground />
-            <Navbar />
-            <div id="overlay">
-              <div id="titleOverlay">
-                <AsciiTitle />
-              </div>
-              {renderPage()}
-            </div> */
