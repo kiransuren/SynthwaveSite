@@ -88,7 +88,11 @@ const ProjectOverlay = () => {
                 <animated.div style={props} className="projectCardWrapper">
                             <a className="projectATag" href={data[index].link} target="_blank">
                             {/* <img className="project-image" src={require(source)}/> */}
-                            <img className="project-image" src={data[index].firebaselink}/> 
+                            <video autoplay="true" loop="true" muted="true" className="project-image" width="250">
+                                <source src={require(data[index].imgsource)}
+                                        type="video/mp4"/>
+                                Sorry, your browser doesn't support embedded videos.
+                            </video>
                             <div className="overlay">   
                                 <p className="projectName">{data[index].name}</p>
                                 <p className="projectDescription">{data[index].description}</p>
@@ -104,3 +108,16 @@ const ProjectOverlay = () => {
 export default ProjectOverlay;
 
 //<img src={require("../../public/deadwatchdemo.gif")}/>
+
+
+require("../../public/videodemo/foodsterdemo.mp4");
+require("../../public/videodemo/LiveLaunchDemo.mp4");
+require("../../public/videodemo/deadwatchdemo.mp4")
+
+require("../../public/videodemo/chemventorydemo.mp4");
+require("../../public/videodemo/gatoraccessFulldemo.mp4");
+require("../../public/videodemo/islanderdemo.mp4")
+
+require("../../public/videodemo/swiftydemo.mp4")
+
+require("../../public/videodemo/synthdemo.mp4")

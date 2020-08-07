@@ -2,56 +2,56 @@
     {
         "name":"LiveLaunch",
         "description":"Get live countdowns on upcoming launches from across the globe, detailed specifications on launch vehicles, as well as an AR view that lets you experience the excitement right from your desk.",
-        "imgsource":"../../public/demos/LiveLaunchDemo.gif",
+        "imgsource":"../../public/videodemo/LiveLaunchDemo.mp4",
         "link":"https://devpost.com/software/livelaunch",
-        "firebaselink":"https://firebasestorage.googleapis.com/v0/b/knowhow-69b71.appspot.com/o/LiveLaunchDemo.gif?alt=media&token=28c49da9-0522-45bb-b9fb-c9ddb28e5c75"
+    },
+
+    {
+        "name":"Synthwave Site",
+        "description":"An experimental portfolio site. Inspired by Synthwave and the 80s as a whole.",
+        "imgsource":"../../public/videodemo/synthdemo.mp4",
+        "link":"https://synthwavesite.netlify.app"
     },
     
     {
         "name":"Foodster",
         "description":"Webapp that finds recipes based off ingredients/cost etc. from an online database. Created using ReactJS",
-        "imgsource":"../../public/demos/croppedfoodster.gif",
+        "imgsource":"../../public/videodemo/foodsterdemo.mp4",
         "link":"https://github.com/kiransuren/foodster",
-        "firebaselink":"https://firebasestorage.googleapis.com/v0/b/knowhow-69b71.appspot.com/o/croppedfoodster.gif?alt=media&token=4d52e626-1306-4538-b0b5-49d637b5861b"
     },
 
     {
         "name":"Chemventory",
         "description":"Database software aimed at assisting science departments in keeping track of their apparatus and chemicals",
-        "imgsource":"../../public/demos/chemventorydemo2.gif",
+        "imgsource":"../../public/videodemo/chemventorydemo.mp4",
         "link":"https://github.com/kiransuren/Chemventory",
-        "firebaselink":"https://firebasestorage.googleapis.com/v0/b/knowhow-69b71.appspot.com/o/chemventorydemo.gif?alt=media&token=f8ce9a9e-5495-427e-8ed3-6fa91bbe277b"
     },
 
     {
         "name":"GatorAccess",
         "description":"Social Media Application that connects students and tutors in a schooling environment.",
-        "imgsource":"../../public/demos/gatoraccessFulldemo.gif",
+        "imgsource":"../../public/videodemo/gatoraccessFulldemo.mp4",
         "link":"https://github.com/kiransuren/GatorAccess",
-        "firebaselink":"https://firebasestorage.googleapis.com/v0/b/knowhow-69b71.appspot.com/o/gatoraccessFulldemo.gif?alt=media&token=eb8ae2e3-03ba-4463-8616-e03106f1860d"
     },
 
     {
         "name":"Islander",
         "description":"Proof of concept Unity game using infinite terrain generation. Find the pieces of your fallen rocket and escape the planet before its too late!",
-        "imgsource":"../../public/demos/islanderdemo.gif",
+        "imgsource":"../../public/videodemo/islanderdemo.mp4",
         "link":"https://github.com/kiransuren/GatorAccess",
-        "firebaselink":"https://firebasestorage.googleapis.com/v0/b/knowhow-69b71.appspot.com/o/islanderdemo.gif?alt=media&token=93137578-c5ee-473e-8da6-e41766124e62"
     },
 
     {
         "name":"Swifty",
         "description":"Swifty is a simple, lightweight note taking iOS app. Perfect for remembering any small pieces of information.",
-        "imgsource":"../../public/demos/swiftydemo.gif",
+        "imgsource":"../../public/videodemo/swiftydemo.mp4",
         "link":"https://github.com/kiransuren/Swifty",
-        "firebaselink":"https://firebasestorage.googleapis.com/v0/b/knowhow-69b71.appspot.com/o/swiftydemo.gif?alt=media&token=705b7360-3c5a-45d0-b1cd-6e81d48f8933"
     },
 
     {
         "name":"Deadwatch",
         "description":"A top-down shooter game created using python and pygame.",
-        "imgsource":"../../public/demos/deadwatchdemo.gif",
+        "imgsource":"../../public/videodemo/deadwatchdemo.mp4",
         "link":"https://github.com/kiransuren/deadwatch",
-        "firebaselink":"https://firebasestorage.googleapis.com/v0/b/knowhow-69b71.appspot.com/o/deadwatchdemo.gif?alt=media&token=551b8403-d339-41a3-922b-0aec134ddd77"
     }
 ]

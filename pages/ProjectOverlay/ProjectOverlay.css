@@ -123,6 +123,7 @@ padding: 0;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
+  height:auto;
 }
 
 #projectTitle{
