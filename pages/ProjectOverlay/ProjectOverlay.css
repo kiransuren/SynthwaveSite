@@ -38,6 +38,7 @@ font-size: 4vw;
 line-height: 5vw;
 color: #00fc0d;
 font-family: 'Roboto Mono', monospace;
+padding-left: 3vw;
 }
 
 
@@ -90,6 +91,7 @@ overflow-y: auto;
 scrollbar-width: none;  /* Firefox */
 background-color: black;
 padding-bottom: 10rem;
+padding: 0;
 }
 
 
@@ -101,13 +103,226 @@ padding-bottom: 10rem;
   margin-bottom: 30rem;
 }
 
-.project{
-  width: 35vw;
-  height: 20vw;
-  padding: 3rem 3rem;
-  border: 3px solid black;
+
+
+#project-card{
+  height: 100vh;
+  padding-top: 5rem;
+  background-color: #00000000;
+  z-index: 1;
+  z-index: 10;
+  min-height: 100vh;
+  height: 100% auto;
+  padding-bottom: 5vw;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  margin: 3rem 0rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
 }
-.project:hover{
-  border: 3px solid white;
-  background-color: rgb(54, 51, 46);
+
+#projectTitle{
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+  font-size: 4rem;
+  color: #dbdbdb;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+
+
+#projectTitleUnderline{
+  height: 0.2rem;
+  background-color: #dbdbdb;
+  margin: 1vw 35vw;
+  display: flex;
+  flex-direction: column;
+}
+
+
+#project-container{
+/*     margin: 3rem 5rem; */
+  margin: 3rem 0rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.projectCardWrapper{
+  position: relative;
+  background-color: #F7FFF7; /*F7F7F7,F7FFF7, FFF8F0 */
+  /* margin: 2rem 2rem; */
+  margin: 2rem 2rem; 
+  text-align: center;
+  border-radius: 5%;
+  width: 35rem;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  -webkit-box-shadow: 49px 29px 66px -24px rgba(0,0,0,0.71);
+  -moz-box-shadow: 49px 29px 66px -24px rgba(0,0,0,0.71);
+  box-shadow: 49px 29px 66px -24px rgba(0,0,0,0.71);
+}
+
+
+.project-image{
+  border-radius: 5%;
+  position: relative;
+  width: 35rem;
+  height: 100% auto;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 35rem;
+  opacity: 0;
+  transition: .5s ease;
+  background-color: #ffffff;/*ebfbfa*/
+  border-radius: 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: 'Merriweather', serif;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.projectCardWrapper:hover .overlay {
+  opacity: 1;
+}
+
+.projectName{
+  color:#201f1f;
+  font-size: 4rem;
+}
+
+.projectDescription{
+  color:#201f1f;
+  margin: 0rem 2rem;
+}
+
+
+@media only screen and (max-width: 700px) { 
+
+  #project-card{
+      height: auto;
+      padding-top: 5vw;
+      background-color: #2b303a;
+      z-index: 1;
+      z-index: 10;
+      height: 100% auto;
+      padding-bottom: 5vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      
+  }
+  
+  #projectTitle{
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      font-size: 7vw;
+      color: #dbdbdb;
+      padding: 0;
+      margin: 0;
+      text-align: center;
+  }
+  
+  
+  #projectTitleUnderline{
+      height: 0.2vw;
+      background-color: #dbdbdb;
+      margin: 1vw 35vw;
+      display: flex;
+      flex-direction: column;
+  }
+  
+  
+  #project-container{
+      margin: 3vw 5vw;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+  }
+  
+  .projectCardWrapper{
+      position: relative;
+      background-color: #F7FFF7; /*F7F7F7,F7FFF7, FFF8F0 */
+      margin: 2vw 2vw;
+      text-align: center;
+      border-radius: 5%;
+      width: auto;
+      height: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+  }
+  
+  
+  .project-image{
+      border-radius: 5%;
+      position: relative;
+      width: 70vw;
+      height: auto;
+  }
+  
+  .overlay {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 100%;
+      width: 70vw;
+      opacity: 0;
+      transition: .5s ease;
+      background-color: #ffffff;/*ebfbfa*/
+      border-radius: 5%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      font-family: 'Merriweather', serif;
+      font-family: 'Montserrat', sans-serif;
+    }
+    
+  .projectCardWrapper:hover .overlay {
+      opacity: 1;
+  }
+  
+  .projectName{
+      font-size: 3vw;
+      color:#201f1f;
+      font-size: 4vw;
+  }
+  
+  .projectDescription{
+      font-size: 3vw;
+      color:#201f1f;
+      margin: 0rem 2vw;
+  }
+}
+
+
+/*DARK MODE*/
+#projectTitle{
+  color: #32cf3a;
+}
+
+
+#projectTitleUnderline{
+  background-color: #32cf3a;
 }

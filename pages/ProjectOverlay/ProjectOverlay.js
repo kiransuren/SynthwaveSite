@@ -3,18 +3,38 @@ import React, {useContext, useEffect, useState, useMemo} from "react";
 import {useSpring, animated, useTrail, useTransition} from 'react-spring';
 import MainContext from '../../MainContext';
 
+import data from './project.json';
+
+
+const ProjectCard = ({source, projectname, description, link}) => {
+  return(
+      <div className="projectCardWrapper">
+          <a href={link} target="_blank">
+          {/* <img className="project-image" src={require(source)}/> */}
+          <img className="project-image" src={source}/> 
+          <div className="overlay">   
+              <p className="projectName">{projectname}</p>
+              <p className="projectDescription">{description}</p>
+          </div>
+          </a>
+      </div>
+  )
+}
+
 //DONT MESS WITH THE TEMPLATE STRING
 const ProjectOverlay = () => {
     const api = useContext(MainContext);
     const primaryDelay = 1500;
     const mainProps = useSpring({
         height: "100vh",
-        padding: "4rem",
+        padding: "0rem",
         paddingTop: "8rem",
         from: {height: "0vh", padding: "0rem", paddingTop: "0rem"},
         config:{duration:1000},
         delay: primaryDelay
     });
+    const [scaleUnderline, setScaleUnderline, stopScale] = useSpring(() => ({from: {transform: "scale(0)", duration:3000}}));
+    const [trail, setTrail, stopTrail] = useTrail(data.length, ()=>({from:{transform: "scale(0)"},config:{ mass: 1, tension: 600, friction: 100 }}))
 
     const [projectProps, set, stop] = useSpring(() => ({
       opacity: 1, 
@@ -34,6 +54,10 @@ const ProjectOverlay = () => {
     }
 
     useEffect(() => {
+        if(api.currentPage() === "PROJ"){
+              setScaleUnderline({transform: "scale(1)", delay:300})
+              setTrail({transform: "scale(1)", delay:100})
+        }
          document.getElementById("project-overlay").addEventListener('scroll', trackScrolling);
          setTimeout(function(){typeWriter("Projects",100,0,"projTitle")}, primaryDelay+1000);
       }, []
@@ -59,33 +83,19 @@ const ProjectOverlay = () => {
     return(
         <animated.div id="project-overlay" style={mainProps}>
            <p><span id="projTitle"></span><span class="blinking">|</span></p>
-           <div id="projectContainer">
-
-             <animated.div style={projectProps} className="project">
-                <img src={require("../../public/deadwatchdemo.gif")}/>
-             </animated.div>
-
-             <animated.div style={projectProps} className="project">
-                <img src={require("../../public/foodsterdemo.gif")}/>
-             </animated.div>
-
-             <animated.div style={projectProps} className="project">
-                <img src={require("../../public/LiveLaunchDemo.gif")}/>
-             </animated.div>
-
-             <animated.div style={projectProps} className="project">
-                <img src={require("../../public/placeholder.png")}/>
-             </animated.div>
-
-             <animated.div style={projectProps} className="project">
-                <img src={require("../../public/placeholder.png")}/>
-             </animated.div>
-
-             <animated.div style={projectProps} className="project">
-                <img src={require("../../public/placeholder.png")}/>
-             </animated.div>
-
-
+           <div id="project-card">
+           {trail.map((props, index) => 
+                <animated.div style={props} className="projectCardWrapper">
+                            <a className="projectATag" href={data[index].link} target="_blank">
+                            {/* <img className="project-image" src={require(source)}/> */}
+                            <img className="project-image" src={data[index].firebaselink}/> 
+                            <div className="overlay">   
+                                <p className="projectName">{data[index].name}</p>
+                                <p className="projectDescription">{data[index].description}</p>
+                            </div>
+                            </a>
+                </animated.div>
+                )}
            </div>
         </animated.div>
     )

@@ -48,18 +48,6 @@ export default function App(props) {
       return <ExperienceOverlay />
     }
   }
-  useEffect(()=>{
-/*     if(api.expMode()){
-      //document.getElementById("primary-div").style.zIndex = -100;
-      //document.getElementById("exmode").style.zIndex = 100;
-
-      document.getElementById("primary-div").style.zIndex = -100;
-      document.getElementById("exmode").style.zIndex = 100;
-    }else{
-      document.getElementById("primary-div").style.zIndex = 100;
-      document.getElementById("exmode").style.zIndex = -100;
-    } */
-  })
 
   return (
     <>
