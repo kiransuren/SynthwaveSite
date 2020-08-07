@@ -43,7 +43,8 @@ export default function App(props) {
   );
 
   const waitFunc = () =>{
-    document.getElementById("loadText").innerHTML = "CLICK TO START";
+    document.getElementById("loadText").innerHTML = "CLICK ANYWHERE TO START";
+    document.getElementById("warningText").className = "loadText";
   }
 
   const changeFunc = () =>{
@@ -66,16 +67,17 @@ export default function App(props) {
     <MainContext.Provider value={api}>
           {
               experimentalMode ?
-              <>
+              <div id="spinOver" onClick={ () => changeFunc() }>
               <div class="spinner">
-                <p id="loadText" onClick={ () => changeFunc() } >LOADING</p>
+                <p id="loadText">LOADING</p>
                 <div class="rect1"></div>
                 <div class="rect2"></div>
                 <div class="rect3"></div>
                 <div class="rect4"></div>
                 <div class="rect5"></div>
+                <p id="warningText">WARNING: You May Experience Large Lag Spikes!</p>
                </div>
-               </>
+               </div>
               :
               <>
             <SynthwaveBackground />
