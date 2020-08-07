@@ -1,0 +1,41 @@
+#navbarExperimental{
+    position: absolute;
+    z-index: 11;
+    width: 100%;
+    height: 4rem;
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem 10rem 0rem 0rem;
+}
+
+
+.navbutton{
+    font-family: 'Source Code Pro', monospace;
+    font-weight: 400;
+    font-size: 1.2vw;
+    border: 0;
+    display: inline;
+    float: none;
+    color: white;
+    background-color: rgba(0,0,0,0);
+    /*padding: 5px;*/
+    width: 11vw;
+    height: 100%;
+    margin: 0 0.5rem 0 0.5rem;
+    outline:none;
+} 
+
+.navbutton:hover{
+    border: 2px white solid;
+}
+
+.contacts{
+    width: 3vw;
+    height: 3vw;
+    margin: 0rem 1rem;
+}
+
+#contactButtons{
+    margin-top: 1rem;
+    margin-left: 1rem;
+}

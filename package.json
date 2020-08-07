@@ -1,0 +1,34 @@
+{
+  "name": "kiransuren.github.io",
+  "version": "1.0.0",
+  "description": "My Personal Website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kiransuren/kiransuren.github.io.git"
+  },
+  "author": "Kiran Surendran",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kiransuren/kiransuren.github.io/issues"
+  },
+  "homepage": "https://github.com/kiransuren/kiransuren.github.io#readme",
+  "keywords": [],
+  "dependencies": {
+    "postprocessing": "^6.16.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-image": "^4.0.3",
+    "react-spring": "^8.0.27",
+    "react-three-fiber": "^4.2.17",
+    "three": "^0.118.3"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4"
+  }
+}

@@ -1,0 +1,154 @@
+.neon-text {
+  font-size: 14rem;
+  color: #ffd8d8;
+}
+.neon-wrapper {
+  display: block;
+  box-shadow:
+  0 0 0.1vw  0.4vw #f8fff7,   
+  0 0 0.4vw  0.6vw #7ce972, 
+  0 0   4vw  0.4vw #3ee50b,
+  inset 0 0 1.5vw  0.4vw #36e50b,
+  inset 0 0 0.4vw  0.2vw #7ce972,
+  inset 0 0 0.5vw  0.2vw #f8fff7;
+  border-radius: 0rem;
+  position: absolute;
+}
+.neon-text {
+  padding: 0 3.5rem 0 3.5rem;
+}
+/*
+#about-overlay{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0);
+  z-index: 10;
+  display: block;
+  overflow-y: visible;
+  overflow-x: hidden;
+}*/
+
+img{
+width: 100% ;
+height:100% ;
+}
+
+#a1{
+position: absolute;
+left: -50vw;
+top: 27.5vh;
+line-height: 80px;
+text-align: left;
+letter-spacing: 0.15em;
+margin-right: 10px;
+color: #EFEFEF;
+background-color: rgba(0, 0, 0, 0);
+width: 45%;
+height: auto;
+}
+
+#title1{
+font-family: 'Source Code Pro', monospace;
+font-weight: 400;
+color: rgb(192, 181, 181); /*rgb(51, 48, 48)*/
+font-size: 4vw;
+line-height: 5vw;
+color: #00fc0d;
+font-family: 'Roboto Mono', monospace;
+}
+
+
+
+#a2{
+display: flex;
+flex-direction: column;
+position: absolute;
+width: 50vw;
+height: 75vh;
+right: 2vw;
+bottom: -75vh;
+border-radius: 2% 2% 0 0;
+background: #FFFFFF;
+background-color: rgba(0, 0, 0, 0);
+width: 50vw;
+}
+
+
+
+.aboutContent{
+margin: 1rem 0rem;
+padding: 1rem 0rem;
+font-family: 'Source Code Pro', monospace;
+font-weight: 400;
+font-style: normal;
+font-size: 2vw; /*2.6vw*/
+color: white;
+width: 70vw;
+opacity: 0;
+}
+
+
+.blinking{
+font-size: 6vw;
+animation:blinkingText 1.2s infinite;
+}
+@keyframes blinkingText{
+0%{     color: #00fc0d;    }
+49%{    color: #00fc0d; }
+60%{    color: white; }
+99%{    color:white;  }
+100%{   color: #00fc0d;    }
+}
+
+
+
+#experience-overlay{
+position: absolute;
+bottom: 0;
+right: 0;
+left: 0;
+top: 0;
+height: 100vh;
+width: 100vw;
+z-index: 10;
+display: block;
+overflow-y: hidden;
+overflow-x: hidden;
+background-color: black;
+/*   background-color: black;
+background-image: radial-gradient(
+  rgba(0, 150, 0, 0.75), black 120%
+);
+overflow: hidden;
+color: white;
+font: 1.3rem Inconsolata, monospace;
+text-shadow: 0 0 5px #C8C8C8; */
+
+}
+
+
+
+/* #about-overlay{
+position: absolute;
+bottom: 0;
+right: 0;
+left: 0;
+top: 0;
+height: 100vh;
+width: 100vw;
+background-color: rgb(0, 0, 0);
+z-index: 10;
+display: block;
+overflow-y: visible;
+overflow-x: hidden;
+} */
+
+#aboutContainer{
+opacity: 1;
+}
+
