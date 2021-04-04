@@ -42,8 +42,7 @@ export default function App(props) {
 
   const changeFunc = () =>{
     document.getElementById("song").play();
-    setExper
-    imentalMode(false);
+    setExperimentalMode(false);
   }
   const renderPage = () =>{
     if(api.currentPage() ==="HOME"){

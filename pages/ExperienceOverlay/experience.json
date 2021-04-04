@@ -1,0 +1,27 @@
+[
+  {
+    "position": "Software Developer, Special Projects",
+    "employer": "Enzuzo Inc.",
+    "description": [
+      "Currently Employed"
+    ]
+  },
+  {
+    "position": "Electrical Team Member",
+    "employer": "University of Waterloo Aerial Robotics Group",
+    "description": [
+      "Sourced an appropriate replaced regulator based on technical specifications and costs while managing a BOM of components",
+      "Developed schematic of regulator subsystem, along with designing an appropriate schematic symbol and footprint",
+      "Redesigned and routed existing PCB to fit new regulator and associated components"
+    ]
+  },
+  {
+    "position": "Firmware/Software Team Member",
+    "employer": "University of Waterloo Robotics Team",
+    "description": [
+      "Wrote a driver for DS-25 Netzer Encoder in C++, implementing SPI communication and enabling direct memory access for asynchronous reads.",
+      "Developed a custom plugin on Ubuntu Linux to handle GPS data conversion and dispatching using C++ and rqt (Qt-based framework)",
+      "Gained extensive knowledge of Robot Operating System (ROS) and related concepts such as nodes, messages, topics and services"
+    ]
+  }
+]

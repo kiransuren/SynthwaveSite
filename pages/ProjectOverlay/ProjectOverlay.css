@@ -1,21 +1,4 @@
 
-/*
-#about-overlay{
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  top: 0;
-  height: 100vh;
-  width: 100vw;
-  background-color: rgba(0, 0, 0, 0);
-  z-index: 10;
-  display: block;
-  overflow-y: visible;
-  overflow-x: hidden;
-}*/
-
-
 #a1{
 position: absolute;
 left: -50vw;
