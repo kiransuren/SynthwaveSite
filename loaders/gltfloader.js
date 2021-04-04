@@ -7,7 +7,7 @@ console.warn( "THREE.GLTFLoader: As part of the transition to ES6 Modules, the f
  * @author Don McCurdy / https://www.donmccurdy.com
  * @author Arseny Kapoulkine / https://github.com/zeux
  */
-import * as THREE from 'Three';
+import * as THREE from 'three';
 THREE.GLTFLoader = ( function () {
 
 	function GLTFLoader( manager ) {

@@ -1,7 +1,7 @@
 //Module Imports
 import React, {useRef, useState, Suspense,useEffect, useContext} from 'react'
 import { extend as applyThree, Canvas, useFrame, useThree, useLoader } from 'react-three-fiber'
-import * as THREE from 'Three';
+import * as THREE from 'three';
 import MainContext from '../../MainContext'
 //GLTF Loader and models to be loaded
 import deloreansilver from '../models/deloreansilver.glb'
