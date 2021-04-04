@@ -1,5 +1,5 @@
 {
-  "name": "kiransuren.github.io",
+  "name": "kiransuren.me",
   "version": "1.0.0",
   "description": "My Personal Website",
   "main": "index.js",
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kiransuren/kiransuren.github.io.git"
+    "url": "git+https://github.com/kiransuren/SynthwaveSite.git"
   },
   "author": "Kiran Surendran",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/kiransuren/kiransuren.github.io/issues"
+    "url": "https://github.com/kiransuren/SynthwaveSite/issues"
   },
-  "homepage": "https://github.com/kiransuren/kiransuren.github.io#readme",
+  "homepage": "https://github.com/kiransuren/SynthwaveSite#readme",
   "keywords": [],
   "dependencies": {
     "postprocessing": "^6.16.0",

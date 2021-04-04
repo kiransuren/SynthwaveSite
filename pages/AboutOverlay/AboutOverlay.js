@@ -27,7 +27,7 @@ const AboutOverlay = () => {
     
     // Write out title
     useEffect(() => {
-        setTimeout(() => typeWriter(0, titleString, 100, "title1"), primaryDelay+1000);
+        setTimeout(() => typeWriter(0, titleString, 100, "about-title"), primaryDelay+1000);
     }, []);
 
     // Show subtext
@@ -39,7 +39,7 @@ const AboutOverlay = () => {
     return(
         <animated.div id="about-overlay" style={mainProps}>
             <animated.div id="aboutContainer">
-                <p><span id="title1"></span><span class="blinking">|</span></p>
+                <p><span id="about-title"></span><span class="blinking">|</span></p>
                 {showCom()}
             </animated.div>
         </animated.div>
