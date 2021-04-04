@@ -1,12 +1,11 @@
-import React, {useContext, useEffect, useState} from "react";
-import {useSpring, animated, useTrail, useTransition} from 'react-spring';
-import MainContext from '../../MainContext';
+import React from "react";
+import {useSpring, animated } from 'react-spring';
 import './ExperienceOverlay.css'
 
-//DONT MESS WITH THE TEMPLATE STRING
 const ExperienceOverlay = () => {
-    const api = useContext(MainContext);
     const primaryDelay = 1500;
+
+    // Animations
     const mainProps = useSpring({
         height: "100vh",
         padding: "4rem",
@@ -23,10 +22,3 @@ const ExperienceOverlay = () => {
 }
 
 export default ExperienceOverlay;
-
-/*        <animated.div style={props} class="neon-wrapper">
-            <div class="neon-text">NEON <br/> TEXT</div>
-        </animated.div>
-*/
-
-//<img src={require("../../public/deadwatchdemo.gif")}/>

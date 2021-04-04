@@ -4,25 +4,18 @@ import SynthwaveBackground from './experimental/SynthwaveBackground/SynthwaveBac
 import AsciiTitle from './experimental/AsciiTitle/AsciiTitle';
 import Navbar from './experimental/Navbar/Navbar';
 import MainContext from './MainContext'
-//React Routes
-
-
-
 
 //React Components
 import AboutOverlay from './pages/AboutOverlay/AboutOverlay';
 import ExperienceOverlay from './pages/ExperienceOverlay/ExperienceOverlay';
 import ProjectOverlay from './pages/ProjectOverlay/ProjectOverlay';
+
 //Misc
 import "./styles.css";
 
-//REDUX:
-//Reducer
-//Store
-//const MainContext = createContext(null);
+
 
 export default function App(props) {
-  //const [cartItems, setCartItems] = useState([]); For Hooks
   const [experimentalMode, setExperimentalMode] = useState(true)
   const setExpMode = (mode) => setExperimentalMode(mode);
   const expMode = () => experimentalMode;
@@ -49,14 +42,15 @@ export default function App(props) {
 
   const changeFunc = () =>{
     document.getElementById("song").play();
-    setExperimentalMode(false);
+    setExper
+    imentalMode(false);
   }
   const renderPage = () =>{
     if(api.currentPage() ==="HOME"){
     }else if (api.currentPage() ==="ABT"){
       return <AboutOverlay />
     }else if (api.currentPage() ==="PROJ"){
-       return <ProjectOverlay />
+      return <ProjectOverlay />
     }else if (api.currentPage() ==="EXP"){
       return <ExperienceOverlay />
     }
