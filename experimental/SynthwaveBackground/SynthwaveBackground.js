@@ -43,92 +43,61 @@ function BloomEffect() {
 
 
 function Delorean() {
-  var carspeed = -0.3 *0.1;
-  var carspeedS = 0.3 *0.3;
-  const parallaxFactor = 0.001;
-  //useEffect(() => document.addEventListener('mousemove', handleMouseMove));
-  var gltf = useLoader(THREE.GLTFLoader, deloreansilver);
-  var sc = gltf.scene;
-  const [left, setLeft] = useState(false);
-  const [right, setRight] = useState(false);
-  const [playerSpeedZ, setPlayerSpeedZ] = useState(0);
+  const horizontalSpeedMax = 0.09;
+  const verticalSpeedMax = -0.03;  
+  const [horizontalSpeed, setHorizontalSpeed] = useState(0);
+  const [verticalSpeed, setVerticalSpeed] = useState(-0.1);
 
-  const handleMouseMove = (event) => {
-      const wW = window.innerWidth;
-      const wH = window.innerHeight;
-      //console.log((event.clientX - (wW/2)) *parallaxFactor);
-      sc.position.x = (event.clientX - (wW/2)) *parallaxFactor;
-      //camera.position.y = ((event.clientY) * parallaxFactor * 10) + 3;
-  }
+  const barrierX = 10
+  const barrierYTop = -20
+  const barrierYBot = 0
 
-  //document.onmousemove = handleMouseMove;
+  const sc = useLoader(THREE.GLTFLoader, deloreansilver).scene;
 
   document.onkeydown = checkKey;
-
   function checkKey(e) {
-
       e = e || window.event;
-
-      if (e.keyCode == '38') {
-          // up arrow
-      }
-      else if (e.keyCode == '40') {
-          // down arrow
-      }
-      else if (e.keyCode == '37') {
-        // left arrow
-        setPlayerSpeedZ(carspeedS);
-        console.log("LEFT");
+      if (e.keyCode == '37') {
+        // LEFT arrow
+        setHorizontalSpeed(horizontalSpeedMax);
       }
       else if (e.keyCode == '39') {
-        // right arrow
-        setPlayerSpeedZ(-carspeedS);
-        console.log("RIGHT");
+        // RIGHT arrow
+        setHorizontalSpeed(-horizontalSpeedMax);
       }
   }
 
-
-  useEffect(()=>{document.onkeydown = checkKey;},[])
-
-  useEffect(()=>{
-  })
-  useFrame(({ clock, camera }) => {
-    if(sc.position.z < (-20)){
-        //speed = -speed;
-        carspeed = -carspeed;
-        //sphere.material.color.setHex(randomColourGenerator());
-    }else if(sc.position.z > 0){
-        carspeed = -carspeed;
-  }
-    
-    if(sc.position.x < -10){
-      //speed = -speed;
-      setPlayerSpeedZ(0);
-      sc.position.x = -10;
-      //sphere.material.color.setHex(randomColourGenerator());
-    }else if(sc.position.x > 10){
-      sc.position.x = 10;
-      setPlayerSpeedZ(0);
+  useFrame(() => {
+    // Vertical Travel Barrier
+    if(sc.position.z < barrierYTop){
+      setVerticalSpeed(-verticalSpeedMax);
+    }else if(sc.position.z > barrierYBot){
+      setVerticalSpeed(verticalSpeedMax);
+    }
+  
+    // Horizontal Travel Barrier
+    if(sc.position.x < -barrierX){
+      setHorizontalSpeed(0);
+      sc.position.x = -barrierX;
+    }else if(sc.position.x > barrierX){
+      sc.position.x = barrierX;
+      setHorizontalSpeed(0);
     }
     
-    sc.translateX(carspeed);
-    sc.translateZ(playerSpeedZ); /*COMMENT OUT FOR NO ARROW CONTROL*/
+    // Execute Translations
+    sc.translateZ(horizontalSpeed); 
+    sc.translateX(verticalSpeed); /*COMMENT OUT FOR NO ARROW CONTROL*/
   });
-
   return <primitive object={sc} position={[0, 0, -8]} rotation={[0,(-Math.PI/2),0]} scale={[4,4,4]}/>
 }
 
 function Moutains() {
-  const gltf = useLoader(THREE.GLTFLoader, mountains);
-  const sc = gltf.scene;
+  const sc = useLoader(THREE.GLTFLoader, mountains).scene;
   return <primitive object={sc} position={[5,3,-200]} rotation={[0,-Math.PI/2,0]} scale={[60,50,56]}/>
 }
 
 
-const scale = 5;
-const posO = new THREE.Vector3(0,10,3);
-const rotO = new THREE.Vector3(0,0,0);
-
+/* CAMERA MOVEMENT */
 const cameraShift = (camera,b) =>{
   const shift = 0.5;
   var moved = false;
@@ -146,12 +115,8 @@ const cameraShift = (camera,b) =>{
   }
   return moved;
 }
-
 const checkSimilarVec = (a,b,e) =>{
-  //let c1 = Math.abs(a.x-b.x) > e ? false : true;
   let c2 = Math.abs(a.y-b.y) > e ? false : true;
-  //let c3 = Math.abs(a.z-b.z) > e ? false : true;
-  //return (c1 && c2 && c3);
   return (c2);
 }
 const cameraRotate = (camera,b) =>{
@@ -163,9 +128,14 @@ const cameraRotate = (camera,b) =>{
   return false;
 }
 
+
+/* 3D SIGNAGE */
+const scale = 5;
+const posO = new THREE.Vector3(0,10,3);
+const rotO = new THREE.Vector3(0,0,0);
+
 function About3D({ api }) {
-  const gltf = useLoader(THREE.GLTFLoader, aboutneonsign);
-  const sc = gltf.scene;
+  const sc = useLoader(THREE.GLTFLoader, aboutneonsign).scene;
   const { camera } = useThree();
   const destVec = new THREE.Vector3(-50, 10,-50);
   const rotVec = new THREE.Vector3(0,1,0);
@@ -177,13 +147,10 @@ function About3D({ api }) {
       api.setPriorPage(api.currentPage());
       api.setCurrentPage("ABT");
     }
-    //console.log('clickAbout');
     camera.position.set(0,10,0);
   }
   
   useFrame(() => {
-    //console.log(rotVec)
-    //console.log(camera.rotation);
    if(api.currentPage() === "ABT"){
     cameraRotate(camera, rotVec);
     cameraShift(camera,destVec);
@@ -197,8 +164,7 @@ function About3D({ api }) {
 }
 
 function Project3D({ api }) {
-  const gltf = useLoader(THREE.GLTFLoader, projectneonsign);
-  const sc = gltf.scene;
+  const sc = useLoader(THREE.GLTFLoader, projectneonsign).scene;
   const { camera } = useThree();
   const destVec = new THREE.Vector3(0, 5,-40);
   const rotVec = new THREE.Vector3(0,0,0);
@@ -224,8 +190,7 @@ function Project3D({ api }) {
 }
 
 function Experience3D({ api }) {
-  const gltf = useLoader(THREE.GLTFLoader, experienceneonsign);
-  const sc = gltf.scene;
+  const sc = useLoader(THREE.GLTFLoader, experienceneonsign).scene;
   const { camera } = useThree();
   const destVec = new THREE.Vector3(45, 10,-50);
   const rotVec = new THREE.Vector3(0,-1,0);
@@ -237,10 +202,9 @@ function Experience3D({ api }) {
     }
     camera.position.set(0,10,0);
   }
-  
+
+
   useFrame(() => {
-/*     console.log("Rotation", camera.rotation);
-    console.log("RotO", rotO); */
     if(api.currentPage() === "EXP"){
       cameraRotate(camera, rotVec);
       cameraShift(camera,destVec);
@@ -254,31 +218,23 @@ function Experience3D({ api }) {
 }
 
 
-
-
-
+/* MONOLITH */
 const randomColourGenerator = () => {
   return (Math.random() * 0xfffff * 1000000);
 }
-
 function Monolith({radius, resolution}) {
-  let sphere = useRef();
-  var d = new Date();
-  let delta = d.getTime();
+  const angleAmount = 0.01;
+  const sphere = useRef();
+  let oldTime = Date.now();
   useFrame(() => {
-    d = new Date(); //Refresh Date
     let pl = sphere.current;
-    let angleAmount = 0.01;
     pl.rotation.y += angleAmount;
     pl.rotation.z += angleAmount;
     pl.rotation.x += angleAmount;
-    //console.log(d.getTime()-delta);
-    if(( d.getTime() - delta) > 1000){
-      delta = d.getTime();
-      //console.log(delta)
+    if(( Date.now() - oldTime) > 1000){
+      oldTime = Date.now();
       pl.material.color.setHex(randomColourGenerator());
     }
-
     });
   return (
     <line ref={sphere} userData={{ test: "hello" }} position={[0, 25, -140]} rotation={[Math.PI/2,0,0]} scale={[ 0.7, 0.7, 0.7]}>
@@ -288,56 +244,45 @@ function Monolith({radius, resolution}) {
   );
 }
 
-
-
+/* FLOOR PLANE */
 function MovingPlane() {
-  var speed = 0.5;
-  let planeR = useRef();
+  //Color choices: CE13D1, 42FFFF
+  const [speed, setSpeed] = useState(0.5)
+  let floorPlane = useRef();
   useFrame(() => {
-    let pl = planeR.current;
-    if(pl.position.z > (2000/2)-500){
-      pl.position.z = 0;
-      //speed = -speed;
-    }else if(pl.position.z < -2000/2){
-      speed = -speed;
+    if(floorPlane.current.position.z > (2000/2)-500){
+      floorPlane.current.position.z = 0;
+    }else if(floorPlane.current.position.z < -2000/2){
+      setSpeed(-speed);
     }
-    pl.translateY(speed)
+    floorPlane.current.translateY(speed)
     });
   return (
-    <line ref={planeR} userData={{ test: "hello" }} position={[0,0,0]} rotation={[Math.PI/2,0,0]}>
+    <line ref={floorPlane} userData={{ test: "hello" }} position={[0,0,0]} rotation={[Math.PI/2,0,0]}>
       <planeBufferGeometry attach="geometry" args={[2000, 2000, 100, 100]} />
       <lineBasicMaterial attach="material" color={0xCE13D1}  linewidth={1} />
     </line>
   );
 }
-//Color choices: CE13D1, 42FFFF
 
-
-const MainScene = ({cPage, api}) =>{
+/* MAIN SCENE */
+const MainScene = ({ api}) =>{
   const {scene} = useRef();
-  const [moveUp, setMoveUp] = useState(false);
-  const { camera } = useThree();
-  const parallaxFactor = 0.001;
-  //useEffect(() => document.addEventListener('mousemove', handleMouseMove));
+  const parallaxFactor = 0.01;
+
+  // DISABLED PARALLAX EFFECT
+  /*
+  useEffect(() => document.addEventListener('mousemove', handleMouseMove));
   const handleMouseMove = (event) => {
     const wW = window.innerWidth;
     const wH = window.innerHeight;
-    //console.log((event.clientX - (wW/2)) *parallaxFactor);
-    camera.position.x = (event.clientX - (wW/2)) *parallaxFactor;
-    //camera.position.y = ((event.clientY) * parallaxFactor * 10) + 3;
-  }/*
-  
-  useFrame(({camera})=>{
-    let cameraSpeed = 0.01
-    //console.log(camera.rotation.x);
-    if(cPage!=="HOME" && camera.rotation.x < 1){
-      camera.rotation.x += cameraSpeed;
+    console.log(api.currentPage());
+    if(api.currentPage() === "HOME"){
+      console.log("RUNNING SINCE HOME")
+      camera.position.x = (event.clientX - (wW/2)) *parallaxFactor;
     }
-    if(cPage==="HOME" && camera.rotation.x > 0){
-      camera.rotation.x -= cameraSpeed;
-    }
-  });*/
-
+  }
+  */
   return(
   <scene ref={scene}>
             {true?  <BloomEffect /> : <></>}
@@ -370,7 +315,6 @@ const MainScene = ({cPage, api}) =>{
 
 const SynthwaveBackground = (props) => {
   const api = useContext(MainContext);
-  var cPage = api.currentPage();
   return (
     <div id="mainCanvas"> 
     <Canvas camera={{fov:75, aspect:window.innerWidth/window.innerHeight, near:0.1,far:300, position: [posO.x,posO.y,posO.z], rotation:[100,0,0]}} //30
@@ -379,7 +323,7 @@ const SynthwaveBackground = (props) => {
             gl.setClearColor(new THREE.Color('#000000'));
             camera.rotation.set(0,0,0);
             }}>
-              <MainScene cPage={cPage} api={api}/>
+              <MainScene api={api}/>
     </Canvas>
     </div>
   );

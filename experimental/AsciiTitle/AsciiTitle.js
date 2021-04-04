@@ -1,52 +1,26 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useContext, useEffect} from "react";
 import {useSpring, animated} from 'react-spring';
 import './AsciiTitle.css'
 import MainContext from '../../MainContext'
-//DONT MESS WITH THE TEMPLATE STRING
+import typeWriter from '../../utils/typeWriter'
+
 const AsciiTitle = () => {
+  const taglineText = 'Programmer | Designer | Tech Enthusiast'; /* The text */
+  const speed = 100; /* The speed/duration of the effect in milliseconds */
   const api = useContext(MainContext);
-  const [toggle,setToggle] = useState(false);
   const [props, set, stop] = useSpring(() => ({opacity: 1, transform: 'translate3d(0px,0,0) scale(0) rotateX(0deg)'}));
-          //setProj(!proj);
-        //set({width: '100rem', from: {width: '0rem'},
-        //config: {mass:10}
-        //})
-  var m;
+  
+  // Zoom ASCII text in and out depending on current page
   useEffect(() => {
-    if(api.currentPage() != "HOME"){
-      console.log("ASCII");
-      console.log("SpringSet?");
-      set({
-        transform: 'translate3d(0px,0,0) scale(0) rotateX(0deg)',
-        config: {duration:1000}
-       });
-    }
-    if(api.currentPage() === "HOME"){
-      console.log("ASCII");
-      console.log("SpringSet?");
-      set({
-        transform: 'translate3d(0px,0,0) scale(1) rotateX(0deg)',
-        config: {duration:1000}
-       });
-       //document.getElementById("tagline").innerHTML = "";
-       //setTimeout(typeWriter, 1000);
-    }
+    set({
+      transform: `translate3d(0px,0,0) scale(${api.currentPage() === 'HOME' ? 1 : 0 }) rotateX(0deg)`,
+      config: {duration:1000}
+     });
   });
 
-  var i = 0;
-  var txt = 'Programmer | Designer | Tech Enthusiast'; /* The text */
-  var speed = 100; /* The speed/duration of the effect in milliseconds */
-  function typeWriter() {
-    if (i < txt.length) {
-      document.getElementById("tagline").innerHTML += txt.charAt(i);
-      //console.log(txt.charAt(i));
-      i++;
-      setTimeout(typeWriter, speed);
-    }
-  }
-
+  // Write out tagline text
   useEffect(() => {
-       setTimeout(typeWriter, 1000);
+       setTimeout(() => typeWriter(0, taglineText, speed, "tagline"), 1000);
     }, []
   );
 
