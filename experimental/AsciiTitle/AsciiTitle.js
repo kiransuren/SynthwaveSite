@@ -5,7 +5,7 @@ import MainContext from '../../MainContext'
 import typeWriter from '../../utils/typeWriter'
 
 const AsciiTitle = () => {
-  const taglineText = 'Programmer | Designer | Tech Enthusiast'; /* The text */
+  const taglineText = 'Yeah, the 80s are pretty cool '; /* The text */
   const speed = 100; /* The speed/duration of the effect in milliseconds */
   const api = useContext(MainContext);
   const [props, set, stop] = useSpring(() => ({opacity: 1, transform: 'translate3d(0px,0,0) scale(0) rotateX(0deg)'}));
