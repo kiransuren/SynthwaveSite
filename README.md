@@ -1,5 +1,5 @@
 # SynthwaveSite
-An experimental portfolio site https://kiransuren.me/. Inspired by Synthwave and the 80s.
+An experimental 3D Rendered Portfolio Website https://kiransuren.me/. Inspired by Synthwave and the 80s aesthetics.
 
 ## Usage:
 

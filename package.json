@@ -1,7 +1,7 @@
 {
   "name": "kiransuren.me",
-  "version": "1.0.0",
-  "description": "My Personal Website",
+  "version": "1.0.1",
+  "description": "Portfolio website using three js and React.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -13,20 +13,20 @@
     "url": "git+https://github.com/kiransuren/SynthwaveSite.git"
   },
   "author": "Kiran Surendran",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/kiransuren/SynthwaveSite/issues"
   },
   "homepage": "https://github.com/kiransuren/SynthwaveSite#readme",
   "keywords": [],
   "dependencies": {
-    "@react-three/fiber": "^9.1.2",
-    "@react-three/postprocessing": "^3.0.4",
-    "postprocessing": "6.37.3",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-image": "4.1.0",
     "react-spring": "10.0.0",
+    "@react-three/fiber": "^9.1.2",
+    "@react-three/postprocessing": "^3.0.4",
+    "postprocessing": "6.37.3",
     "three": "0.176.0"
   },
   "devDependencies": {
