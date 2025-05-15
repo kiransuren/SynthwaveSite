@@ -317,16 +317,50 @@ const MainScene = ({ api}) =>{
 
 const SynthwaveBackground = (props) => {
   const api = useContext(MainContext);
+  // Always use the current window aspect ratio
+  const [aspect, setAspect] = React.useState(window.innerWidth / window.innerHeight);
+
+  React.useEffect(() => {
+    const handleResize = () => {
+      setAspect(window.innerWidth / window.innerHeight);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
-    <div id="mainCanvas"> 
-    <Canvas camera={{fov:75, aspect:window.innerWidth/window.innerHeight, near:0.1,far:300, position: [posO.x,posO.y,posO.z], rotation:[100,0,0]}} //30
-            gl={{antialias:true}}
-            onCreated={({ gl, camera }) => {
-            gl.setClearColor(new THREE.Color('#000000'));
-            camera.rotation.set(0,0,0);
-            }}>
-              <MainScene api={api}/>
-    </Canvas>
+    <div id="mainCanvas" style={{
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      width: '100vw',
+      height: '100vh',
+      margin: 0,
+      padding: 0,
+      zIndex: 0,
+      background: 'black',
+      overflow: 'hidden',
+    }}>
+      <Canvas
+        camera={{
+          fov: 75,
+          aspect: aspect,
+          near: 0.1,
+          far: 300,
+          position: [posO.x, posO.y, posO.z],
+          rotation: [100, 0, 0]
+        }}
+        gl={{ antialias: true }}
+        style={{ width: '100vw', height: '100vh', display: 'block' }}
+        onCreated={({ gl, camera }) => {
+          gl.setClearColor(new THREE.Color('#000000'));
+          camera.aspect = window.innerWidth / window.innerHeight;
+          camera.updateProjectionMatrix();
+          camera.rotation.set(0, 0, 0);
+        }}
+      >
+        <MainScene api={api} />
+      </Canvas>
     </div>
   );
 }
