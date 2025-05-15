@@ -1,11 +1,12 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {useSpring, animated, useTrail} from 'react-spring';
 import './AboutOverlay.css'
 import typeWriter from '../../utils/typeWriter'
+import commandsData from './aboutCommands.json'
 
 const AboutOverlay = () => {
     const primaryDelay = 2000;
-    const commands = ["  I’m a passionate software developer, electrical meddler and 3D design/mechanical tinkerer.","  I love to explore new tech and enjoy collaborating with friends and strangers alike on hackathons and other projects.","  And yes, the making of this site was heavily influenced by a certain frizzy haired scientist and his Delorean that could travel through time."]
+    const commands = commandsData.commands;
     const titleString = 'Who Is Kiran Surendran?';
 
     // Animations
@@ -33,7 +34,7 @@ const AboutOverlay = () => {
     // Show subtext
     const showCom = () =>{
         return trail.map((props, index) =>
-        <animated.p className="aboutContent" style={props}>>>{commands[index]}</animated.p>)
+        <animated.p className="aboutContent" style={props}>{'>>>'}{commands[index]}</animated.p>)
     }
 
     return(
