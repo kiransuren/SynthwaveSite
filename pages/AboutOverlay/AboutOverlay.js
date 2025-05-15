@@ -5,9 +5,9 @@ import typeWriter from '../../utils/typeWriter'
 import commandsData from './aboutCommands.json'
 
 const AboutOverlay = () => {
-    const primaryDelay = 2000;
+    const primaryDelay = 1000;
     const commands = commandsData.commands;
-    const titleString = 'Who Is Kiran Surendran?';
+    const titleString = 'Who is Kiran Surendran?';
 
     // Animations
     const mainProps = useSpring({
@@ -24,7 +24,7 @@ const AboutOverlay = () => {
         config:{duration:500},
         delay: primaryDelay + 1000
     });
-    const trail = useTrail(3, {opacity: 1, delay:primaryDelay+2500, from:{opacity:0}, duration:2000}) /*config:{ mass: 1, tension:300, friction: 26 */
+    const trail = useTrail(commands.length, {opacity: 1, delay:primaryDelay+2500, from:{opacity:0}, duration:2000}) /*config:{ mass: 1, tension:300, friction: 26 */
     
     // Write out title
     useEffect(() => {
@@ -34,7 +34,7 @@ const AboutOverlay = () => {
     // Show subtext
     const showCom = () =>{
         return trail.map((props, index) =>
-        <animated.p className="aboutContent" style={props}>{'>>>'}{commands[index]}</animated.p>)
+        <animated.p className="aboutContent" style={props}>{'>>'}{commands[index]}</animated.p>)
     }
 
     return(

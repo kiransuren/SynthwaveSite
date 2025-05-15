@@ -14,7 +14,7 @@ import experienceneonsign from '../models/experienceNeonsignV1.glb'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
 import "./SynthwaveBackground.css";
-
+import speeds from './speeds.json';
 
 //React Routes
 
@@ -36,18 +36,16 @@ function BloomEffect() {
 }
 
 function Delorean() {
-  const horizontalSpeedMax = 0.09;
-  const verticalSpeedMax = -0.03;  
-  const [horizontalSpeed, setHorizontalSpeed] = useState(0);
-  const [verticalSpeed, setVerticalSpeed] = useState(-0.1);
+  const horizontalSpeedMax = speeds.deloreanHorizontalSpeedMax;
+  const verticalSpeedMax = speeds.deloreanVerticalSpeedMax;  
+  const [horizontalSpeed, setHorizontalSpeed] = useState(speeds.deloreanInitialHorizontalSpeed);
+  const [verticalSpeed, setVerticalSpeed] = useState(speeds.deloreanInitialVerticalSpeed);
 
   const barrierX = 10
   const barrierYTop = -20
-  const barrierYBot = 0
+  const barrierYBot = -10
 
   const sc = useLoader(GLTFLoader,deloreansilver).scene;
-  console.log("SCENE: ");
-  console.log(sc);  
   document.onkeydown = checkKey;
   function checkKey(e) {
       e = e || window.event;
@@ -61,7 +59,7 @@ function Delorean() {
       }
   }
 
-  useFrame(() => {
+  useFrame((state, delta) => {
     // Vertical Travel Barrier
     if(sc.position.z < barrierYTop){
       setVerticalSpeed(-verticalSpeedMax);
@@ -79,8 +77,8 @@ function Delorean() {
     }
     
     // Execute Translations
-    sc.translateZ(horizontalSpeed); 
-    sc.translateX(verticalSpeed); /*COMMENT OUT FOR NO ARROW CONTROL*/
+    sc.translateZ(horizontalSpeed * delta * 60); 
+    sc.translateX(verticalSpeed * delta * 60); /*COMMENT OUT FOR NO ARROW CONTROL*/
   });
   return <primitive object={sc} position={[0, 0, -8]} rotation={[0,(-Math.PI/2),0]} scale={[4,4,4]}/>
 }
@@ -92,19 +90,16 @@ function Moutains() {
 
 
 /* CAMERA MOVEMENT */
-const cameraShift = (camera,b) =>{
-  const shift = 0.5;
-  var moved = false;
-  if(camera.position.x !== b.x){
-    camera.position.x -= shift * (camera.position.x-b.x)/Math.abs(camera.position.x-b.x);
-    moved = true;
-  }
-  if(camera.position.y !== b.y){
-    camera.position.y -= shift * (camera.position.y-b.y)/Math.abs(camera.position.y-b.y);
-    moved = true;
-  }
-  if(camera.position.z !== b.z){
-    camera.position.z -= shift * (camera.position.z-b.z)/Math.abs(camera.position.z-b.z);
+const cameraShift = (camera, b) => {
+  // Use a tunable speed for smoothness
+  const shift = speeds.cameraShiftSpeed ?? 0.08; // Lower = smoother
+  let moved = false;
+  // Smoothly interpolate each axis using lerp
+  camera.position.x += (b.x - camera.position.x) * shift;
+  camera.position.y += (b.y - camera.position.y) * shift;
+  camera.position.z += (b.z - camera.position.z) * shift;
+  // Consider as moved if any axis is not close enough
+  if (Math.abs(camera.position.x - b.x) > 0.01 || Math.abs(camera.position.y - b.y) > 0.01 || Math.abs(camera.position.z - b.z) > 0.01) {
     moved = true;
   }
   return moved;
@@ -217,23 +212,36 @@ const randomColourGenerator = () => {
   return (Math.random() * 0xfffff * 1000000);
 }
 function Monolith({radius, resolution}) {
-  const angleAmount = 0.01;
+  const angleAmount = speeds.monolithAngleAmount ?? 0.01;
+  const colorChangeInterval = speeds.monolithColorChangeIntervalMs ?? 1000;
+  const initialColor = speeds.monolithInitialColor ?? 0x00fc0d;
+  const baseScale = speeds.monolithScale ?? 0.7;
+  const position = speeds.monolithPosition ?? [0, 25, -140];
+  const rotation = speeds.monolithRotation ?? [Math.PI/2,0,0];
+
   const sphere = useRef();
-  let oldTime = Date.now();
-  useFrame(() => {
+  const oldTime = useRef(Date.now());
+  const scaleRef = useRef(baseScale);
+  useFrame((state, delta) => {
     let pl = sphere.current;
-    pl.rotation.y += angleAmount;
-    pl.rotation.z += angleAmount;
-    pl.rotation.x += angleAmount;
-    if(( Date.now() - oldTime) > 1000){
-      oldTime = Date.now();
+    // Use delta for frame-rate independent rotation
+    pl.rotation.y += angleAmount * delta * 60;
+    pl.rotation.z += angleAmount * delta * 60;
+    pl.rotation.x += angleAmount * delta * 60;
+    // Cyclic scale animation over 2 seconds
+    const t = state.clock.getElapsedTime();
+    const scaleAnim = baseScale + 0.1 * Math.abs(Math.sin((Math.PI * t) / 1)); // 2s period
+    pl.scale.set(scaleAnim, scaleAnim, scaleAnim);
+    // Use state.clock for frame-rate independent color change
+    if(state.clock.getElapsedTime() * 1000 - oldTime.current > colorChangeInterval){
+      oldTime.current = state.clock.getElapsedTime() * 1000;
       pl.material.color.setHex(randomColourGenerator());
     }
-    });
+  });
   return (
-    <line ref={sphere} userData={{ test: "hello" }} position={[0, 25, -140]} rotation={[Math.PI/2,0,0]} scale={[ 0.7, 0.7, 0.7]}>
+    <line ref={sphere} userData={{ test: "hello" }} position={position} rotation={rotation}>
       <sphereGeometry attach="geometry" args={[radius, resolution, resolution]} />
-      <lineBasicMaterial attach="material" color={0x00fc0d}  linewidth={1} />
+      <lineBasicMaterial attach="material" color={initialColor}  linewidth={1} />
     </line>
   );
 }
@@ -241,15 +249,15 @@ function Monolith({radius, resolution}) {
 /* FLOOR PLANE */
 function MovingPlane() {
   //Color choices: CE13D1, 42FFFF
-  const [speed, setSpeed] = useState(0.5)
+  const [speed, setSpeed] = useState(speeds.floorPlaneSpeed)
   let floorPlane = useRef();
-  useFrame(() => {
+  useFrame((state, delta) => {
     if(floorPlane.current.position.z > (2000/2)-500){
       floorPlane.current.position.z = 0;
     }else if(floorPlane.current.position.z < -2000/2){
       setSpeed(-speed);
     }
-    floorPlane.current.translateY(speed)
+    floorPlane.current.translateY(speed * delta * 60)
     });
   return (
     <line ref={floorPlane} userData={{ test: "hello" }} position={[0,0,0]} rotation={[Math.PI/2,0,0]}>

@@ -1,0 +1,14 @@
+{
+  "deloreanHorizontalSpeedMax": 0.09,
+  "deloreanVerticalSpeedMax": -0.03,
+  "deloreanInitialHorizontalSpeed": 0,
+  "deloreanInitialVerticalSpeed": -0.1,
+  "floorPlaneSpeed": 0.1,
+  "monolithAngleAmount": 0.01,
+  "monolithColorChangeIntervalMs": 1000,
+  "monolithInitialColor": 1035533,
+  "monolithScale": 0.7,
+  "monolithPosition": [0, 25, -140],
+  "monolithRotation": [1.5707963267948966, 0, 0],
+  "cameraShiftSpeed": 0.008
+}
