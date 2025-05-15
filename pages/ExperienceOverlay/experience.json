@@ -1,27 +1,38 @@
 [
   {
-    "position": "Software Developer, Special Projects",
-    "employer": "Enzuzo Inc.",
+    "position": "Autonomy Engineer",
+    "employer": "AeroVect",
+    "startDate": "Jan 3rd 2025",
+    "endDate": "Oct 5th 2025",
     "description": [
       "Currently Employed"
     ]
   },
   {
-    "position": "Electrical Team Member",
-    "employer": "University of Waterloo Aerial Robotics Group",
+    "position": "Robotics Firmware Developer",
+    "employer": "Deep Trekker Inc.",
+    "startDate": "May 1st 2024",
+    "endDate": "Aug 31st 2024",
     "description": [
-      "Sourced an appropriate replaced regulator based on technical specifications and costs while managing a BOM of components",
-      "Developed schematic of regulator subsystem, along with designing an appropriate schematic symbol and footprint",
-      "Redesigned and routed existing PCB to fit new regulator and associated components"
+      "Internship"
     ]
   },
   {
-    "position": "Firmware/Software Team Member",
-    "employer": "University of Waterloo Robotics Team",
+    "position": "Linux Developer",
+    "employer": "Wind River",
+    "startDate": "Jan 10th 2023",
+    "endDate": "Dec 15th 2023",
     "description": [
-      "Wrote a driver for DS-25 Netzer Encoder in C++, implementing SPI communication and enabling direct memory access for asynchronous reads.",
-      "Developed a custom plugin on Ubuntu Linux to handle GPS data conversion and dispatching using C++ and rqt (Qt-based framework)",
-      "Gained extensive knowledge of Robot Operating System (ROS) and related concepts such as nodes, messages, topics and services"
+      "Internship"
+    ]
+  },
+  {
+    "position": "Software Developer, Special Projects",
+    "employer": "Enzuzo Inc.",
+    "startDate": "Jun 5th 2022",
+    "endDate": "Sep 20th 2022",
+    "description": [
+      "Internship"
     ]
   }
 ]

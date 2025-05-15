@@ -9,12 +9,13 @@ const ExperienceCard = ({props, index}) => {
     return(
         <animated.div style={props} className="experienceCardWrapper">
             <div className="experienceTitle">
-                <p className="experiencePosition">{data[index].position}</p>
-                <span style={{fontSize:"3vw", color:"#2b303a"}} >{"|"}</span>
-                <p className="experienceEmployer">{data[index].employer}</p>
+                <p className="experiencePosition" style={{display: 'inline', marginRight: '0.5em'}}>{data[index].position}</p>
+                <span style={{fontSize:"3vw", color:"#2b303a", margin: '0 0.5em'}} >{"|"}</span>
+                <p className="experienceEmployer" style={{display: 'inline', marginRight: '0.5em'}}>{data[index].employer}</p>
+                <span className="experienceDates" style={{display: 'inline', color:"#2b303a", fontSize: '1.1em', marginLeft: '0.5em'}}>{data[index].startDate} - {data[index].endDate}</span>
             </div>
             {
-                data[index].description.map(point =>  <p className="experienceDescription">{">> "+point}</p>)
+                data[index].description.map((point, i) =>  <p key={i} className="experienceDescription">{">> "+point}</p>)
             }
         </animated.div>
     )
