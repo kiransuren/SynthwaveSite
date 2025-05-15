@@ -34,13 +34,13 @@ const AboutOverlay = () => {
     // Show subtext
     const showCom = () =>{
         return trail.map((props, index) =>
-        <animated.p className="aboutContent" style={props}>{'>>'}{commands[index]}</animated.p>)
+        <animated.p key={index} className="aboutContent" style={props}>{'>>'}{commands[index]}</animated.p>)
     }
 
     return(
         <animated.div id="about-overlay" style={mainProps}>
             <animated.div id="aboutContainer">
-                <p><span id="about-title"></span><span class="blinking">|</span></p>
+                <p><span id="about-title"></span><span className="blinking">|</span></p>
                 {showCom()}
             </animated.div>
         </animated.div>

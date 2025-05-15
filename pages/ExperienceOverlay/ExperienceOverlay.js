@@ -48,10 +48,10 @@ const ExperienceOverlay = () => {
 
     return(
         <animated.div id="experience-overlay" style={mainProps}>
-            <p><span id="experienceTitle"></span><span class="blinking">|</span></p>
+            <p><span id="experienceTitle"></span><span className="blinking">|</span></p>
             <div id="experience-container">
                 {trail.map((props, index) => 
-                   <ExperienceCard props={props} index={index} />
+                   <ExperienceCard key={index} props={props} index={index} />
                 )
                 }
             </div>

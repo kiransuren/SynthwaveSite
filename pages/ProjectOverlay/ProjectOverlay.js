@@ -5,24 +5,46 @@ import MainContext from '../../MainContext';
 import typeWriter from '../../utils/typeWriter'
 import data from './project.json';
 
+// Import all mp4s statically for Parcel v2
+import foodsterdemo from '../../public/videodemo/foodsterdemo.mp4';
+import LiveLaunchDemo from '../../public/videodemo/LiveLaunchDemo.mp4';
+import deadwatchdemo from '../../public/videodemo/deadwatchdemo.mp4';
+import chemventorydemo from '../../public/videodemo/chemventorydemo.mp4';
+import gatoraccessFulldemo from '../../public/videodemo/gatoraccessFulldemo.mp4';
+import islanderdemo from '../../public/videodemo/islanderdemo.mp4';
+import swiftydemo from '../../public/videodemo/swiftydemo.mp4';
+import synthdemo from '../../public/videodemo/synthdemo.mp4';
+
+// Map keys/filenames to imports
+const videoMap = {
+  'foodsterdemo.mp4': foodsterdemo,
+  'LiveLaunchDemo.mp4': LiveLaunchDemo,
+  'deadwatchdemo.mp4': deadwatchdemo,
+  'chemventorydemo.mp4': chemventorydemo,
+  'gatoraccessFulldemo.mp4': gatoraccessFulldemo,
+  'islanderdemo.mp4': islanderdemo,
+  'swiftydemo.mp4': swiftydemo,
+  'synthdemo.mp4': synthdemo,
+};
 
 const ProjectCard = ({props, index}) => {
-  return(
+  // Use the filename from your JSON as the key
+  const videoSrc = videoMap[data[index].imgsource.replace('videodemo/', '')];
+  return (
     <animated.div style={props} className="projectCardWrapper">
-      <a className="projectATag" href={data[index].link} target="_blank">
-        {/* <img className="project-image" src={require(source)}/> */}
-        <video autoplay="true" loop="true" muted="true" className="project-image" width="250">
-            <source src={require(data[index].imgsource)} type="video/mp4"/>
-            Sorry, your browser doesn't support embedded videos.
+      <a className="projectATag" href={data[index].link} target="_blank" rel="noopener noreferrer">
+        <video autoPlay loop muted className="project-image" width="250">
+          <source src={videoSrc} type="video/mp4" />
+          Sorry, your browser doesn't support embedded videos.
         </video>
         <div className="overlay">   
-            <p className="projectName">{data[index].name}</p>
-            <p className="projectDescription">{data[index].description}</p>
+          <p className="projectName">{data[index].name}</p>
+          <p className="projectDescription">{data[index].description}</p>
         </div>
       </a>
     </animated.div>
-  )
-}
+  );
+};
 
 //DONT MESS WITH THE TEMPLATE STRING
 const ProjectOverlay = () => {
@@ -60,9 +82,9 @@ const ProjectOverlay = () => {
 
     return(
         <animated.div id="project-overlay" style={mainProps}>
-           <p><span id="projTitle"></span><span class="blinking">|</span></p>
+           <p><span id="projTitle"></span><span className="blinking">|</span></p>
            <div id="project-card">
-           {trail.map((props, index) => <ProjectCard props={props} index={index}/>
+           {trail.map((props, index) => <ProjectCard key={index} props={props} index={index}/>
                 )}
            </div>
         </animated.div>
@@ -70,13 +92,3 @@ const ProjectOverlay = () => {
 }
 
 export default ProjectOverlay;
-
-// Preload mp4s (TODO: terrible way of handling mp4, find a fix)
-require("../../public/videodemo/foodsterdemo.mp4");
-require("../../public/videodemo/LiveLaunchDemo.mp4");
-require("../../public/videodemo/deadwatchdemo.mp4")
-require("../../public/videodemo/chemventorydemo.mp4");
-require("../../public/videodemo/gatoraccessFulldemo.mp4");
-require("../../public/videodemo/islanderdemo.mp4")
-require("../../public/videodemo/swiftydemo.mp4")
-require("../../public/videodemo/synthdemo.mp4")

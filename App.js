@@ -30,15 +30,6 @@ export default function App(props) {
 
 
   const api = {setCurrentPage, currentPage, setPriorPage, priorPage, setExpMode, expMode};
-  useEffect(() => {
-    setTimeout(() => {  waitFunc(); }, 2000);
-   },[]
-  );
-
-  const waitFunc = () =>{
-    document.getElementById("loadText").innerHTML = "CLICK ANYWHERE TO START";
-    document.getElementById("warningText").className = "loadText";
-  }
 
   const changeFunc = () =>{
     document.getElementById("song").play();
