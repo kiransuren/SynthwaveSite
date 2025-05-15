@@ -20,13 +20,14 @@
   "homepage": "https://github.com/kiransuren/SynthwaveSite#readme",
   "keywords": [],
   "dependencies": {
-    "postprocessing": "^6.16.0",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-image": "^4.0.3",
-    "react-spring": "^8.0.27",
-    "react-three-fiber": "^4.2.17",
-    "three": "^0.118.3"
+    "@react-three/fiber": "^9.1.2",
+    "@react-three/postprocessing": "^3.0.4",
+    "postprocessing": "6.37.3",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "react-image": "4.1.0",
+    "react-spring": "10.0.0",
+    "three": "0.176.0"
   },
   "devDependencies": {
     "parcel-bundler": "^1.12.4"

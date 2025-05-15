@@ -1,6 +1,6 @@
 //Module Imports
 import React, {useRef, useState, Suspense,useEffect, useContext} from 'react'
-import { extend as applyThree, Canvas, useFrame, useThree, useLoader } from 'react-three-fiber'
+import { extend as applyThree, Canvas, useFrame, useThree, useLoader } from '@react-three/fiber'
 import * as THREE from 'three';
 import MainContext from '../../MainContext'
 //GLTF Loader and models to be loaded
@@ -11,7 +11,7 @@ import aboutneonsign from '../models/aboutNeonsignV1.glb'
 import projectneonsign from '../models/projectNeonsignV1.glb'
 import experienceneonsign from '../models/experienceNeonsignV1.glb'
 
-import { GLTFLoader } from '../../loaders/gltfloader'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
 import "./SynthwaveBackground.css";
 
@@ -21,26 +21,19 @@ import "./SynthwaveBackground.css";
 //React Components
 
 //Postprocessing
-import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
-import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass'
-import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass'
-applyThree({ EffectComposer, RenderPass, UnrealBloomPass });
-
+import { EffectComposer, Bloom } from '@react-three/postprocessing'
 
 function BloomEffect() {
-    const { gl, scene, camera, size } = useThree()
-    const composer = useRef()
-    useEffect(() => void composer.current.setSize(size.width, size.height), [size])
-    // This takes over as the main render-loop (when 2nd arg is set to true)
-    useFrame(() => composer.current.render(), true)
-    return (
-      <effectComposer ref={composer} args={[gl]}>
-        <renderPass attachArray="passes" args={[scene, camera]} />
-        <unrealBloomPass attachArray="passes" args={[new THREE.Vector2( window.innerWidth, window.innerHeight ), 1.5, 0.4, 0.85]} threshold={0} strength={0.8} radius={1} renderToScreen />
-      </effectComposer>
-    )
+  return (
+    <EffectComposer>
+      <Bloom
+        luminanceThreshold={0}
+        luminanceSmoothing={0.2}
+        intensity={0.5}
+      />
+    </EffectComposer>
+  )
 }
-
 
 function Delorean() {
   const horizontalSpeedMax = 0.09;
@@ -52,8 +45,9 @@ function Delorean() {
   const barrierYTop = -20
   const barrierYBot = 0
 
-  const sc = useLoader(THREE.GLTFLoader, deloreansilver).scene;
-
+  const sc = useLoader(GLTFLoader,deloreansilver).scene;
+  console.log("SCENE: ");
+  console.log(sc);  
   document.onkeydown = checkKey;
   function checkKey(e) {
       e = e || window.event;
@@ -92,7 +86,7 @@ function Delorean() {
 }
 
 function Moutains() {
-  const sc = useLoader(THREE.GLTFLoader, mountains).scene;
+  const sc = useLoader(GLTFLoader,mountains).scene;
   return <primitive object={sc} position={[5,3,-200]} rotation={[0,-Math.PI/2,0]} scale={[60,50,56]}/>
 }
 
@@ -135,7 +129,7 @@ const posO = new THREE.Vector3(0,10,3);
 const rotO = new THREE.Vector3(0,0,0);
 
 function About3D({ api }) {
-  const sc = useLoader(THREE.GLTFLoader, aboutneonsign).scene;
+  const sc = useLoader(GLTFLoader,aboutneonsign).scene;
   const { camera } = useThree();
   const destVec = new THREE.Vector3(-50, 10,-50);
   const rotVec = new THREE.Vector3(0,1,0);
@@ -164,7 +158,7 @@ function About3D({ api }) {
 }
 
 function Project3D({ api }) {
-  const sc = useLoader(THREE.GLTFLoader, projectneonsign).scene;
+  const sc = useLoader(GLTFLoader,projectneonsign).scene;
   const { camera } = useThree();
   const destVec = new THREE.Vector3(0, 5,-40);
   const rotVec = new THREE.Vector3(0,0,0);
@@ -190,7 +184,7 @@ function Project3D({ api }) {
 }
 
 function Experience3D({ api }) {
-  const sc = useLoader(THREE.GLTFLoader, experienceneonsign).scene;
+  const sc = useLoader(GLTFLoader,experienceneonsign).scene;
   const { camera } = useThree();
   const destVec = new THREE.Vector3(45, 10,-50);
   const rotVec = new THREE.Vector3(0,-1,0);
@@ -238,7 +232,7 @@ function Monolith({radius, resolution}) {
     });
   return (
     <line ref={sphere} userData={{ test: "hello" }} position={[0, 25, -140]} rotation={[Math.PI/2,0,0]} scale={[ 0.7, 0.7, 0.7]}>
-      <sphereBufferGeometry attach="geometry" args={[radius, resolution, resolution]} />
+      <sphereGeometry attach="geometry" args={[radius, resolution, resolution]} />
       <lineBasicMaterial attach="material" color={0x00fc0d}  linewidth={1} />
     </line>
   );
@@ -259,7 +253,7 @@ function MovingPlane() {
     });
   return (
     <line ref={floorPlane} userData={{ test: "hello" }} position={[0,0,0]} rotation={[Math.PI/2,0,0]}>
-      <planeBufferGeometry attach="geometry" args={[2000, 2000, 100, 100]} />
+      <planeGeometry attach="geometry" args={[2000, 2000, 100, 100]} />
       <lineBasicMaterial attach="material" color={0xCE13D1}  linewidth={1} />
     </line>
   );
@@ -285,7 +279,7 @@ const MainScene = ({ api}) =>{
   */
   return(
   <scene ref={scene}>
-            {true?  <BloomEffect /> : <></>}
+            {true ?  <BloomEffect /> : <></>}
             <ambientLight color={0xFFFFFF} strength={100}/>
             <pointLight color={0xFFFFFF} strength={1000} distance={1000}/>
             <Suspense fallback={null}>

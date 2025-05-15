@@ -1,6 +1,5 @@
-import ReactDOM from 'react-dom'
 import React, { useRef, useState } from 'react'
-import { Canvas, useFrame } from 'react-three-fiber'
+import { Canvas, useFrame } from '@react-three/fiber'
 
 function Box(props) {
     // This reference will give us direct access to the mesh
@@ -21,7 +20,7 @@ function Box(props) {
         onClick={e => console.log("yeeyee")}
         onPointerOver={e => setHover(true)}
         onPointerOut={e => setHover(false)}>
-        <boxBufferGeometry attach="geometry" args={[10, 10, 10]} />
+        <boxGeometry attach="geometry" args={[10, 10, 10]} />
         <meshStandardMaterial attach="material" color={'red'} />
       </mesh>
     )
