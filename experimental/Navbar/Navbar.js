@@ -17,13 +17,13 @@ const Navbar = () => {
         <animated.nav id="navbarExperimental">
             <div id="contactButtons" >
                 <a href="https://github.com/kiransuren" target="_blank">
-                    <img className="contacts" src={require("../../public/github.png")}/>
+                    <img className="contacts" src={require("url:../../public/github.png")}/>
                 </a>
                 <a href="https://www.linkedin.com/in/kiran-surendran1" target="_blank">
-                    <img className="contacts" src={require("../../public/linkedin.png")}/>
+                    <img className="contacts" src={require("url:../../public/linkedin.png")}/>
                 </a>
                 <a href="mailto:kirank.suren@gmail.com" target="_blank">
-                    <img className="contacts" src={require("../../public/email.png")}/>
+                    <img className="contacts" src={require("url:../../public/email.png")}/>
                 </a>
             </div>
             <animated.div id="navButtons" style={props}>
